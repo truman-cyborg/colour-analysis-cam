@@ -1,0 +1,26 @@
+{
+  "summer_cool_muted": {
+    "label": "Summer · Cool · Muted",
+    "lightness": { "min": 45, "max": 75, "weight": 30 },
+    "chroma": { "min": 10, "max": 35, "weight": 35 },
+    "hueSectors": {
+      "sectors": [
+        [150, 270],
+        [300, 360],
+        [0, 20]
+      ],
+      "toleranceDegrees": 60,
+      "weight": 35
+    },
+    "warmthPenalty": {
+      "lab_b_gt": 20,
+      "penalty": 10
+    },
+    "matchBuckets": [
+      { "minScore": 85, "label": "excellent" },
+      { "minScore": 70, "label": "good" },
+      { "minScore": 55, "label": "close" },
+      { "minScore": 0, "label": "not a match" }
+    ]
+  }
+}
