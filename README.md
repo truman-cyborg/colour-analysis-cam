@@ -1,97 +1,209 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Color Picker Mobile
 
-# Getting Started
+A React Native application that allows users to detect and analyze colors from images, with specialized features for skin tone detection and analysis.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- **Real-time Camera Color Detection**: Use your device's camera to detect colors in real-time
+- **Image Color Extraction**: Pick images from your gallery and extract dominant colors
+- **Skin Tone Analysis**: Advanced skin tone detection with professional tone matching
+- **Native Android Integration**: Optimized color extraction using native Android modules
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Tech Stack
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- **React Native** 0.80.0
+- **TypeScript**
+- **React Native Vision Camera** for camera functionality
+- **React Native Image Picker** for gallery access
+- **Native Android Module** for optimized color extraction
+- **React Native Reanimated** for smooth animations
 
-```sh
-# Using npm
+## Prerequisites
+
+- Node.js >= 18
+- npm or Yarn
+- Android Studio (for Android development)
+- Xcode (for iOS development)
+- React Native development environment set up ([Guide](https://reactnative.dev/docs/set-up-your-environment))
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone [your-repo-url]
+cd ColorPickerMobile080
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. For iOS, install CocoaPods dependencies:
+```bash
+cd ios
+bundle install
+bundle exec pod install
+cd ..
+```
+
+## Running the Application
+
+### Start Metro Bundler
+
+First, start the Metro development server:
+
+```bash
 npm start
-
-# OR using Yarn
+# or
 yarn start
 ```
 
-## Step 2: Build and run your app
+### Run on Android
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+```bash
 npm run android
-
-# OR using Yarn
+# or
 yarn android
 ```
 
-### iOS
+### Run on iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+```bash
 npm run ios
-
-# OR using Yarn
+# or
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Project Structure
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```
+ColorPickerMobile080/
+├── src/
+│   ├── components/
+│   │   └── ColorCamera.tsx      # Camera component for real-time color detection
+│   ├── native/
+│   │   └── ColorExtractor.ts    # TypeScript interface for native module
+│   ├── utils/
+│   │   ├── imageColorExtractor.ts    # Image color extraction utilities
+│   │   ├── simpleColorDetector.ts    # Basic color detection algorithms
+│   │   └── toneEvaluator.ts          # Skin tone evaluation logic
+│   ├── ColorPickerApp.tsx       # Main application component
+│   └── toneProfiles.json        # Skin tone profile data
+├── android/
+│   └── app/src/main/java/com/colorpickermobile080/
+│       ├── ColorExtractorModule.java    # Native Android color extraction
+│       └── ColorExtractorPackage.java   # Native module package
+├── ios/                          # iOS specific code
+└── App.tsx                       # App entry point
+```
 
-## Step 3: Modify your app
+## Key Components
 
-Now that you have successfully run the app, let's make changes!
+### ColorPickerApp
+The main application component that manages the overall app state and navigation between different features.
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+### ColorCamera
+Implements real-time color detection using the device camera with Vision Camera integration.
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+### Native Color Extractor
+Android native module that provides optimized color extraction from images using Android's Palette API.
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+### Tone Evaluator
+Advanced skin tone matching system that compares detected colors against professional skin tone profiles.
 
-## Congratulations! :tada:
+## Development
 
-You've successfully run and modified your React Native App. :partying_face:
+### Linting
 
-### Now what?
+Run ESLint to check code quality:
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+```bash
+npm run lint
+```
 
-# Troubleshooting
+### Testing
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+Run the test suite:
 
-# Learn More
+```bash
+npm test
+```
 
-To learn more about React Native, take a look at the following resources:
+### Building for Production
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+#### Android
+
+Generate a release APK:
+
+```bash
+cd android
+./gradlew assembleRelease
+```
+
+The APK will be available at `android/app/build/outputs/apk/release/`
+
+#### iOS
+
+1. Open the project in Xcode:
+```bash
+cd ios
+open ColorPickerMobile080.xcworkspace
+```
+
+2. Select your target device
+3. Choose Product > Archive from the menu
+
+## Troubleshooting
+
+### Android Build Issues
+
+If you encounter Gradle issues:
+```bash
+cd android
+./gradlew clean
+cd ..
+npm run android
+```
+
+### iOS Build Issues
+
+Clear build cache and reinstall pods:
+```bash
+cd ios
+rm -rf Pods Podfile.lock
+bundle exec pod install
+cd ..
+npm run ios
+```
+
+### Metro Bundler Issues
+
+Reset Metro cache:
+```bash
+npx react-native start --reset-cache
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is private and proprietary.
+
+## Support
+
+For issues and questions, please open an issue in the repository.
+
+## Learn More
+
+- [React Native Documentation](https://reactnative.dev/docs/getting-started)
+- [Vision Camera Documentation](https://react-native-vision-camera.com/)
+- [React Native Image Picker](https://github.com/react-native-image-picker/react-native-image-picker)
